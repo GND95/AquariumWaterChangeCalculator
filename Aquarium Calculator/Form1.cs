@@ -96,8 +96,7 @@ namespace Aquarium_Calculator
             initialWeightSelection = true;
         }
 
-
-        void resultMessage()
+        void resultMessage() //allows the user the copy the water change information to their clipboard
         {
             MessageBox.Show("Your water change amount is " + Math.Round((finalResult * 100), 2).ToString() + "% of your aquarium water.", "Result");
             DialogResult dialog = MessageBox.Show("Would you like to copy this information to clipboard?", "Result", MessageBoxButtons.YesNo);
@@ -111,120 +110,134 @@ namespace Aquarium_Calculator
 
         private void button2_Click(object sender, EventArgs e)
         {
-            button1.Enabled = true;
-            label1.Show();
-            label4.Show();
-            label5.Show();
-            label8.Show();
-            counter++;
-            inputArray[counter] = Convert.ToDecimal(textBox1.Text);
-
-            switch (counter)
+            try
             {
-                case 1:
-                    weight1.Text = inputArray[counter].ToString();
-                    break;
-                case 2:
-                    weight2.Text = inputArray[counter].ToString();
-                    break;
-                case 3:
-                    weight3.Text = inputArray[counter].ToString();
-                    break;
-                case 4:
-                    weight4.Text = inputArray[counter].ToString();
-                    break;
-                case 5:
-                    weight5.Text = inputArray[counter].ToString();
-                    break;
-                case 6:
-                    weight6.Text = inputArray[counter].ToString();
-                    break;
-                case 7:
-                    weight7.Text = inputArray[counter].ToString();
-                    break;
-                case 8:
-                    weight8.Text = inputArray[counter].ToString();
-                    break;
-                case 9:
-                    weight9.Text = inputArray[counter].ToString();
-                    break;
-                case 10:
-                    weight10.Text = inputArray[counter].ToString();
-                    break;
+                button1.Enabled = true;
+                label1.Show();
+                label4.Show();
+                label5.Show();
+                label8.Show();
+                counter++;
+                inputArray[counter] = Convert.ToDecimal(textBox1.Text);
+
+                switch (counter)
+                {
+                    case 1:
+                        weight1.Text = inputArray[counter].ToString();
+                        break;
+                    case 2:
+                        weight2.Text = inputArray[counter].ToString();
+                        break;
+                    case 3:
+                        weight3.Text = inputArray[counter].ToString();
+                        break;
+                    case 4:
+                        weight4.Text = inputArray[counter].ToString();
+                        break;
+                    case 5:
+                        weight5.Text = inputArray[counter].ToString();
+                        break;
+                    case 6:
+                        weight6.Text = inputArray[counter].ToString();
+                        break;
+                    case 7:
+                        weight7.Text = inputArray[counter].ToString();
+                        break;
+                    case 8:
+                        weight8.Text = inputArray[counter].ToString();
+                        break;
+                    case 9:
+                        weight9.Text = inputArray[counter].ToString();
+                        break;
+                    case 10:
+                        weight10.Text = inputArray[counter].ToString();
+                        break;
+                }
+                textBox1.Text = "";
+
+                if (this.Height < 700) //prevent the form from being increased in size beyond the maximum allowed number of buckets
+                {
+                    this.Height += 43; //increase the size of the form to show information about more buckets of water
+                }
             }
-            textBox1.Text = "";
-
-            if (this.Height < 700) //prevent the form from being increased in size beyond the maximum allowed number of buckets
+            catch
             {
-                this.Height += 43; //increase the size of the form to show information about more buckets of water
+                MessageBox.Show("Please enter a valid number in both of the text boxes."); //basic error handling to keep program from crashing
+                counter--; //negates the effect of the counter increment in the previous try block
             }
         }
         private void button1_Click(object sender, EventArgs e)
-        {
-            //final calculation    
-            decimal aquariumSize = Convert.ToDecimal(textBox2.Text); //the number of gallons the aquarium is           
-            switch (counter)
+        {       //final calculation 
+            try
             {
-                case 1:
-                    initialResult = inputArray[1] / Convert.ToDecimal(totalWeight1.Text);
-                    secondResult = initialResult * 5; //multiply the number of gallons that SHOULD be in the (5 gallon) bucket to give how many gallons you actually have based on the percent of weight (you have) to total weight (should be) of the bucket
-                    finalResult = secondResult / aquariumSize;
-                    resultMessage();
-                    break;
-                case 2:
-                    initialResult = (inputArray[1] + inputArray[2]) / Convert.ToDecimal(totalWeight2.Text);  //adding the weight of the buckets together and then dividing by what the weight should be
-                    secondResult = initialResult * 10; //multiply the number of gallons that SHOULD be in the (5 gallon) bucket to give how many gallons you actually have based on the percent of weight (you have) to total weight (should be) of the buckets                    
-                    finalResult = secondResult / aquariumSize;
-                    resultMessage();
-                    break;
-                case 3:
-                    initialResult = (inputArray[1] + inputArray[2] + inputArray[3]) / Convert.ToDecimal(totalWeight3.Text);  //adding the weight of the buckets together and then dividing by what the weight should be
-                    secondResult = initialResult * 15; //multiply the number of gallons that SHOULD be in the (5 gallon) bucket to give how many gallons you actually have based on the percent of weight (you have) to total weight (should be) of the buckets                    
-                    finalResult = secondResult / aquariumSize;
-                    resultMessage();
-                    break;
-                case 4:
-                    initialResult = (inputArray[1] + inputArray[2] + inputArray[3] + inputArray[4]) / Convert.ToDecimal(totalWeight4.Text);  //adding the weight of the buckets together and then dividing by what the weight should be
-                    secondResult = initialResult * 20; //multiply the number of gallons that SHOULD be in the (5 gallon) bucket to give how many gallons you actually have based on the percent of weight (you have) to total weight (should be) of the buckets                    
-                    finalResult = secondResult / aquariumSize;
-                    resultMessage();
-                    break;
-                case 5:
-                    initialResult = (inputArray[1] + inputArray[2] + inputArray[3] + inputArray[4] + inputArray[5]) / Convert.ToDecimal(totalWeight5.Text);  //adding the weight of the buckets together and then dividing by what the weight should be
-                    secondResult = initialResult * 25; //multiply the number of gallons that SHOULD be in the (5 gallon) bucket to give how many gallons you actually have based on the percent of weight (you have) to total weight (should be) of the buckets                    
-                    finalResult = secondResult / aquariumSize;
-                    resultMessage();
-                    break;
-                case 6:
-                    initialResult = (inputArray[1] + inputArray[2] + inputArray[3] + inputArray[4] + inputArray[5] + inputArray[6]) / Convert.ToDecimal(totalWeight6.Text);  //adding the weight of the buckets together and then dividing by what the weight should be
-                    secondResult = initialResult * 30; //multiply the number of gallons that SHOULD be in the (5 gallon) bucket to give how many gallons you actually have based on the percent of weight (you have) to total weight (should be) of the buckets                    
-                    finalResult = secondResult / aquariumSize;
-                    resultMessage();
-                    break;
-                case 7:
-                    initialResult = (inputArray[1] + inputArray[2] + inputArray[3] + inputArray[4] + inputArray[5] + inputArray[6] + inputArray[7]) / Convert.ToDecimal(totalWeight7.Text);  //adding the weight of the buckets together and then dividing by what the weight should be
-                    secondResult = initialResult * 35; //multiply the number of gallons that SHOULD be in the (5 gallon) bucket to give how many gallons you actually have based on the percent of weight (you have) to total weight (should be) of the buckets                    
-                    finalResult = secondResult / aquariumSize;
-                    resultMessage();
-                    break;
-                case 8:
-                    initialResult = (inputArray[1] + inputArray[2] + inputArray[3] + inputArray[4] + inputArray[5] + inputArray[6] + inputArray[7] + inputArray[8]) / Convert.ToDecimal(totalWeight8.Text);  //adding the weight of the buckets together and then dividing by what the weight should be
-                    secondResult = initialResult * 40; //multiply the number of gallons that SHOULD be in the (5 gallon) bucket to give how many gallons you actually have based on the percent of weight (you have) to total weight (should be) of the buckets                    
-                    finalResult = secondResult / aquariumSize;
-                    resultMessage();
-                    break;
-                case 9:
-                    initialResult = (inputArray[1] + inputArray[2] + inputArray[3] + inputArray[4] + inputArray[5] + inputArray[6] + inputArray[7] + inputArray[8] + inputArray[9]) / Convert.ToDecimal(totalWeight9.Text);  //adding the weight of the buckets together and then dividing by what the weight should be
-                    secondResult = initialResult * 45; //multiply the number of gallons that SHOULD be in the (5 gallon) bucket to give how many gallons you actually have based on the percent of weight (you have) to total weight (should be) of the buckets                    
-                    finalResult = secondResult / aquariumSize;
-                    resultMessage();
-                    break;
-                case 10:
-                    initialResult = (inputArray[1] + inputArray[2] + inputArray[3] + inputArray[4] + inputArray[5] + inputArray[6] + inputArray[7] + inputArray[8] + inputArray[9] + inputArray[10]) / Convert.ToDecimal(totalWeight10.Text);  //adding the weight of the buckets together and then dividing by what the weight should be
-                    secondResult = initialResult * 50; //multiply the number of gallons that SHOULD be in the (5 gallon) bucket to give how many gallons you actually have based on the percent of weight (you have) to total weight (should be) of the buckets                    
-                    finalResult = secondResult / aquariumSize;
-                    resultMessage();
-                    break;
+                decimal aquariumSize = Convert.ToDecimal(textBox2.Text); //the number of gallons the aquarium is           
+                switch (counter)
+                {
+                    case 1:
+                        initialResult = inputArray[1] / Convert.ToDecimal(totalWeight1.Text);
+                        secondResult = initialResult * 5; //multiply the number of gallons that SHOULD be in the (5 gallon) bucket to give how many gallons you actually have based on the percent of weight (you have) to total weight (should be) of the bucket
+                        finalResult = secondResult / aquariumSize;
+                        resultMessage();
+                        break;
+                    case 2:
+                        initialResult = (inputArray[1] + inputArray[2]) / Convert.ToDecimal(totalWeight2.Text);  //adding the weight of the buckets together and then dividing by what the weight should be
+                        secondResult = initialResult * 10; //multiply the number of gallons that SHOULD be in the (5 gallon) bucket to give how many gallons you actually have based on the percent of weight (you have) to total weight (should be) of the buckets                    
+                        finalResult = secondResult / aquariumSize;
+                        resultMessage();
+                        break;
+                    case 3:
+                        initialResult = (inputArray[1] + inputArray[2] + inputArray[3]) / Convert.ToDecimal(totalWeight3.Text);  //adding the weight of the buckets together and then dividing by what the weight should be
+                        secondResult = initialResult * 15; //multiply the number of gallons that SHOULD be in the (5 gallon) bucket to give how many gallons you actually have based on the percent of weight (you have) to total weight (should be) of the buckets                    
+                        finalResult = secondResult / aquariumSize;
+                        resultMessage();
+                        break;
+                    case 4:
+                        initialResult = (inputArray[1] + inputArray[2] + inputArray[3] + inputArray[4]) / Convert.ToDecimal(totalWeight4.Text);  //adding the weight of the buckets together and then dividing by what the weight should be
+                        secondResult = initialResult * 20; //multiply the number of gallons that SHOULD be in the (5 gallon) bucket to give how many gallons you actually have based on the percent of weight (you have) to total weight (should be) of the buckets                    
+                        finalResult = secondResult / aquariumSize;
+                        resultMessage();
+                        break;
+                    case 5:
+                        initialResult = (inputArray[1] + inputArray[2] + inputArray[3] + inputArray[4] + inputArray[5]) / Convert.ToDecimal(totalWeight5.Text);  //adding the weight of the buckets together and then dividing by what the weight should be
+                        secondResult = initialResult * 25; //multiply the number of gallons that SHOULD be in the (5 gallon) bucket to give how many gallons you actually have based on the percent of weight (you have) to total weight (should be) of the buckets                    
+                        finalResult = secondResult / aquariumSize;
+                        resultMessage();
+                        break;
+                    case 6:
+                        initialResult = (inputArray[1] + inputArray[2] + inputArray[3] + inputArray[4] + inputArray[5] + inputArray[6]) / Convert.ToDecimal(totalWeight6.Text);  //adding the weight of the buckets together and then dividing by what the weight should be
+                        secondResult = initialResult * 30; //multiply the number of gallons that SHOULD be in the (5 gallon) bucket to give how many gallons you actually have based on the percent of weight (you have) to total weight (should be) of the buckets                    
+                        finalResult = secondResult / aquariumSize;
+                        resultMessage();
+                        break;
+                    case 7:
+                        initialResult = (inputArray[1] + inputArray[2] + inputArray[3] + inputArray[4] + inputArray[5] + inputArray[6] + inputArray[7]) / Convert.ToDecimal(totalWeight7.Text);  //adding the weight of the buckets together and then dividing by what the weight should be
+                        secondResult = initialResult * 35; //multiply the number of gallons that SHOULD be in the (5 gallon) bucket to give how many gallons you actually have based on the percent of weight (you have) to total weight (should be) of the buckets                    
+                        finalResult = secondResult / aquariumSize;
+                        resultMessage();
+                        break;
+                    case 8:
+                        initialResult = (inputArray[1] + inputArray[2] + inputArray[3] + inputArray[4] + inputArray[5] + inputArray[6] + inputArray[7] + inputArray[8]) / Convert.ToDecimal(totalWeight8.Text);  //adding the weight of the buckets together and then dividing by what the weight should be
+                        secondResult = initialResult * 40; //multiply the number of gallons that SHOULD be in the (5 gallon) bucket to give how many gallons you actually have based on the percent of weight (you have) to total weight (should be) of the buckets                    
+                        finalResult = secondResult / aquariumSize;
+                        resultMessage();
+                        break;
+                    case 9:
+                        initialResult = (inputArray[1] + inputArray[2] + inputArray[3] + inputArray[4] + inputArray[5] + inputArray[6] + inputArray[7] + inputArray[8] + inputArray[9]) / Convert.ToDecimal(totalWeight9.Text);  //adding the weight of the buckets together and then dividing by what the weight should be
+                        secondResult = initialResult * 45; //multiply the number of gallons that SHOULD be in the (5 gallon) bucket to give how many gallons you actually have based on the percent of weight (you have) to total weight (should be) of the buckets                    
+                        finalResult = secondResult / aquariumSize;
+                        resultMessage();
+                        break;
+                    case 10:
+                        initialResult = (inputArray[1] + inputArray[2] + inputArray[3] + inputArray[4] + inputArray[5] + inputArray[6] + inputArray[7] + inputArray[8] + inputArray[9] + inputArray[10]) / Convert.ToDecimal(totalWeight10.Text);  //adding the weight of the buckets together and then dividing by what the weight should be
+                        secondResult = initialResult * 50; //multiply the number of gallons that SHOULD be in the (5 gallon) bucket to give how many gallons you actually have based on the percent of weight (you have) to total weight (should be) of the buckets                    
+                        finalResult = secondResult / aquariumSize;
+                        resultMessage();
+                        break;
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Please enter a valid number in both of the text boxes."); //basic error handling to keep program from crashing
             }
         }
 
